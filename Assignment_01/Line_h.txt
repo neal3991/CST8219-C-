@@ -1,0 +1,16 @@
+// Line.h
+#ifndef LINE
+#define LINE
+
+struct Point
+{
+	int x, y;
+};
+
+struct Line
+{
+	Point start;
+	Point end;
+};
+
+#endif

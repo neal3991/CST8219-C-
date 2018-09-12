@@ -1,0 +1,17 @@
+// VectorGraphic.h
+
+#ifndef VECTORGRAPHIC
+#define VECTORGRAPHIC
+
+class VectorGraphic
+{	
+	static const int MAX_ELEMENTS = 1024;
+	GraphicElement Elements[MAX_ELEMENTS];	// pool of elements
+	unsigned int numElements;		// number filled
+public:
+	VectorGraphic::VectorGraphic():numElements(0){}
+	void AddGraphicElement();
+	void ReportVectorGraphic();
+};
+
+#endif

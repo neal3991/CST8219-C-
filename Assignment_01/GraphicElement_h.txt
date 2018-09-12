@@ -1,0 +1,21 @@
+// GraphicElement.h
+
+#ifndef GRAPHICELEMENT
+#define GRAPHICELEMENT
+
+class GraphicElement
+{	
+	char* name;
+	Stash Lines;	// a Stash of Line objects	
+public:
+	GraphicElement():name(nullptr),Lines(sizeof(Line)){}
+	~GraphicElement()
+	{
+		if (name)
+			delete []name;
+	}
+	char*& GetName();  // Accessor
+	Stash& GetLines(); // Accessor
+};
+
+#endif

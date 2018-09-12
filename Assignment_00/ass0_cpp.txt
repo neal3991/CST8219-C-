@@ -1,0 +1,69 @@
+// ass0 W17
+
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRTDBG_MAP_ALLOC	// need this to get the line identification
+//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF|_CRTDBG_LEAK_CHECK_DF); // in main, after local declarations
+//NB must be in debug build
+#include <crtdbg.h>
+#include <stdio.h>
+#include "CLib.h"
+
+	enum{ RUNNING = 1 };	
+		
+	struct Point
+	{
+		int x, y;
+	};
+
+	struct Line
+	{
+		Point start;
+		Point end;
+	};
+
+	struct GraphicElement
+	{
+		enum{ SIZE = 256 };
+		char name[SIZE];
+		CStash Lines;	// a Stash of Lines
+	};
+
+	struct VectorGraphic
+	{
+		CStash Elements;	// a Stash of GraphicElements
+	};
+
+	void AddGraphicElement(VectorGraphic*);
+	void ReportVectorGraphic(VectorGraphic*);
+	void CleanUpVectorGraphic(VectorGraphic*);
+
+	VectorGraphic Image;
+	
+	int main()
+	{
+		char response;
+		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+		initialize(&(Image.Elements),sizeof(GraphicElement));	// it's a Stash of GraphicElements
+
+		while (RUNNING)
+		{
+			printf("\nPlease select an option:\n");
+			printf("1. Add a Graphic Element\n");
+			printf("2. List the Graphic Elements\n");
+			printf("q. Quit\n");
+			printf("CHOICE: ");
+			fflush(stdin);
+			scanf("%c", &response);
+
+			switch (response)
+			{
+			case '1':AddGraphicElement(&Image); break;
+			case '2':ReportVectorGraphic(&Image); break;
+			case 'q':CleanUpVectorGraphic(&Image); return 0;
+			default:printf("Please enter a valid option\n");
+			}
+			printf("\n");
+		}
+		return 0;
+	}
